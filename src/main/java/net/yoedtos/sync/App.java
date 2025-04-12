@@ -16,9 +16,11 @@ public class App {
 		LOGGER.debug("App start: {}", Arrays.toString(args));
 		var threads = Integer.valueOf(args[1]);
 
-		System.out.println("Reproduce 'Virtual Thread Pinning' issue");
-		System.out.println("Number of cores: " + Runtime.getRuntime().availableProcessors());
-		System.out.println("Started with " + threads + " threads");
+		System.out.println("\n\tReproduce 'Virtual Thread Pinning' issue\n");
+		System.out.println("\tNumber of cores: " + Runtime.getRuntime().availableProcessors());
+		System.out.println("\tJDK version: " + System.getProperty("java.version"));
+		System.out.println("\tStarted with " + threads + " threads");
+		System.out.println("\t----------------------------------------");
 		try {
 			new NoVirtual(threads).execute(Type.EXPLICIT);
 			new Virtual(threads).execute(Type.EXPLICIT);
@@ -26,5 +28,6 @@ public class App {
 			LOGGER.error("Error: ", e.toString());
 			throw e;
 		}
+		System.out.println("\t----------------------------------------");
 	}
 }
