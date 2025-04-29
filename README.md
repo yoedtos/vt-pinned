@@ -3,7 +3,7 @@ This experiment was inspired on the Dan Vegas's blog article:
 [JDK 24's Major Improvement: Virtual Threads Without Pinning](https://www.danvega.dev/blog/jdk-24-virtual-threads-without-pinning)
 
 #### Run the experiment with 20 threads
-`java -jar target/vt-pinned-1.0-SNAPSHOT-jar-with-dependencies.jar -t 20`
+`java -jar target/vt-pinned-1.0-SNAPSHOT-jar-with-dependencies.jar -t 20 explicit`
 
 > [!IMPORTANT]
 > This require to switch the JDK 21 to JDK 24 by using `sdkman` ou `jenv`.
