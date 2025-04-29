@@ -14,6 +14,9 @@ public class App {
 
 	public static void main(String[] args) {
 		LOGGER.debug("App start: {}", Arrays.toString(args));
+		if(args.length < 3 || !args[0].contains("-t")) {
+			throw new IllegalArgumentException("Invalid command");
+		}
 		var threads = Integer.valueOf(args[1]);
 
 		System.out.println("\n\tReproduce 'Virtual Thread Pinning' issue\n");
@@ -22,8 +25,10 @@ public class App {
 		System.out.println("\tStarted with " + threads + " threads");
 		System.out.println("\t----------------------------------------");
 		try {
-			new NoVirtual(threads).execute(Type.EXPLICIT);
-			new Virtual(threads).execute(Type.EXPLICIT);
+			var lockType = args[2].toUpperCase();
+			LOGGER.debug("Lock type: {}", args[2]);
+			new NoVirtual(threads).execute(Type.valueOf(lockType));
+			new Virtual(threads).execute(Type.valueOf(lockType));
 		} catch (Exception e) {
 			LOGGER.error("Error: ", e.toString());
 			throw e;
