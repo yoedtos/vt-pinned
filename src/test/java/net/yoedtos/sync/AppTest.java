@@ -1,6 +1,7 @@
 package net.yoedtos.sync;
 
 import static org.assertj.core.api.Assertions.assertThatCode;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
@@ -31,5 +32,16 @@ class AppTest {
 			new NoVirtual(20).execute(Type.IMPLICIT);
 		})
 		.doesNotThrowAnyException();
+	}
+
+	@Test
+	void testAppCommandArguments() {
+		assertThatThrownBy(() -> App.main(new String[]{"-e", "2", "implicit"}))
+			.isInstanceOf(IllegalArgumentException.class)
+			.hasMessage("Invalid command");
+
+		assertThatThrownBy(() -> App.main(new String[]{"-t", "2"}))
+			.isInstanceOf(IllegalArgumentException.class)
+			.hasMessage("Invalid command");
 	}
 }
